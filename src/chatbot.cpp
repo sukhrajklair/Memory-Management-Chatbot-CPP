@@ -44,7 +44,81 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+//copy constructor
+ChatBot::ChatBot(ChatBot const& source)
+{
+    std::cout << "ChatBot Copy Constructor" << std::endl;
 
+    //copy the non-manged handlers
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+    _chatLogic = source._chatLogic;
+
+    //deep copy the image resource
+    _image = new wxBitmap;
+    *_image = *source._image;
+}
+ChatBot& ChatBot::operator=(ChatBot const& source)
+{
+    std::cout << "ChatBot Copy Assignement" << std::endl;
+    if (this == &source)
+        return *this;
+    //copy the non-manged handlers
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+    _chatLogic = source._chatLogic;
+
+    //deep copy the image resource
+    _image = new wxBitmap;
+    *_image = *source._image;
+
+    return *this;
+}
+//move constructor
+ChatBot::ChatBot(ChatBot && source)
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+
+    //copy the non-manged handlers
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    _currentNode = source._currentNode;
+
+    //move ownership of managed data to the new object
+    _image = source._image;
+    
+    //set source handles to nullptr
+    source._rootNode = nullptr;
+    source._currentNode = nullptr;
+    source._chatLogic = nullptr;
+    source._image = nullptr;
+}
+
+//move assignment operator
+ChatBot& ChatBot::operator=(ChatBot && source)
+{
+    std::cout << "ChatBot Move Assignment" << std::endl;
+
+    if (this == &source)
+        return *this;
+    //copy the non-managed handlers
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+    _currentNode = source._currentNode;
+
+    //delete previous data
+    delete _image;
+    //move ownership of managed data to the new object
+    _image = source._image;
+    
+    //set source handles to nullptr
+    source._rootNode = nullptr;
+    source._currentNode = nullptr;
+    source._chatLogic = nullptr;
+    source._image = nullptr;
+
+    return *this;
+}
 ////
 //// EOF STUDENT CODE
 
