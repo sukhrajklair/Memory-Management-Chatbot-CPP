@@ -1,6 +1,6 @@
 #ifndef CHATGUI_H_
 #define CHATGUI_H_
-
+#define __GXX_ABI_VERSION 1009
 #include <wx/wx.h>
 #include <memory>
 

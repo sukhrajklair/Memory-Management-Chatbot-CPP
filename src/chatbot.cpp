@@ -53,7 +53,7 @@ ChatBot::ChatBot(ChatBot const& source)
     _rootNode = source._rootNode;
     _currentNode = source._currentNode;
     _chatLogic = source._chatLogic;
-
+	_chatLogic -> SetChatbotHandle(this);
     //deep copy the image resource
     _image = new wxBitmap();
     *_image = *source._image;
@@ -67,7 +67,7 @@ ChatBot& ChatBot::operator=(ChatBot const& source)
     _rootNode = source._rootNode;
     _currentNode = source._currentNode;
     _chatLogic = source._chatLogic;
-
+	_chatLogic -> SetChatbotHandle(this);
     //deep copy the image resource
     if (_image != nullptr)
         delete _image;
@@ -85,7 +85,7 @@ ChatBot::ChatBot(ChatBot && source)
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
     _currentNode = source._currentNode;
-
+	_chatLogic -> SetChatbotHandle(this);
     //move ownership of managed data to the new object
     _image = source._image;
     
@@ -107,7 +107,7 @@ ChatBot& ChatBot::operator=(ChatBot && source)
     _rootNode = source._rootNode;
     _chatLogic = source._chatLogic;
     _currentNode = source._currentNode;
-
+	_chatLogic -> SetChatbotHandle(this);
     //delete previous data
     delete _image;
     //move ownership of managed data to the new object
