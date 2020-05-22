@@ -218,11 +218,11 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
     }
 
     //create new instance of ChatBot
-    std::unique_ptr<ChatBot> chatbot(new ChatBot("../images/chatbot.png"));
-    chatbot->SetChatLogicHandle(this);
-    _chatBot = chatbot.get();
+    ChatBot chatbot = ChatBot("../images/chatbot.png");
+    chatbot.SetChatLogicHandle(this);
+    _chatBot = &chatbot;
     // add chatbot to graph root node
-    chatbot->SetRootNode(rootNode);
+    chatbot.SetRootNode(rootNode);
     rootNode->MoveChatbotHere(std::move(chatbot));
     
     ////
